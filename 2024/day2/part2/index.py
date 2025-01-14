@@ -9,7 +9,7 @@ def is_safe_report(report):
 
   return False
 
-def recursive_report_safety_check(report):
+def apply_the_problem_dampener(report):
   flag = False
   for idx, data in enumerate(report):
     removed_element = report.pop(idx)
@@ -19,40 +19,6 @@ def recursive_report_safety_check(report):
     report.insert(idx, removed_element)
 
   return flag
-
-def the_problem_dampener(report):
-  increase = False
-  decrease = False
-  same_number = False
-  is_safe = is_safe_report(report)
-  for idx, data in enumerate(report):
-    if (idx == len(report) - 1):
-      continue
-
-    if (not(increase)):
-      increase = np.sign(report[idx+1] - data) == 1
-    if (not(decrease)):
-      decrease = np.sign(report[idx+1] - data) == -1
-    if (not(same_number)):
-      same_number = np.sign(report[idx+1] - data) == 0
-
-    if (same_number):
-      is_safe = recursive_report_safety_check(report)
-      break
-    if (increase and (decrease or same_number)):
-      is_safe = recursive_report_safety_check(report)
-      break
-    if (decrease and (increase or same_number)):
-      is_safe = recursive_report_safety_check(report)
-      break
-    if (increase and report[idx+1] - data > 3):
-      is_safe = recursive_report_safety_check(report)
-      break
-    if (decrease and report[idx+1] - data < -3):
-      is_safe = recursive_report_safety_check(report)
-      break
-
-  return is_safe
 
 # Open the file in read mode
 with open('input.txt', 'r') as file:
@@ -64,7 +30,7 @@ with open('input.txt', 'r') as file:
     # Safe increasing report or safe decreasing report
     if (is_safe_report(report)):
       number_of_safe_reports += 1
-    elif (the_problem_dampener(report)):
+    elif (apply_the_problem_dampener(report)):
       number_of_safe_reports += 1
 
 print('Number of safe reports with the problem dampener is:', number_of_safe_reports)
