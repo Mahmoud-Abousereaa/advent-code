@@ -7,7 +7,6 @@ similarity_score = []
 with open('input.txt', 'r') as file:
   # Read each line in the file
   for line in file:
-    # Print each line
     line_list = line.split()
     left_hand_side_item = line_list[::len(line_list)]
     right_hand_side_item = line_list[len(line_list)-1]

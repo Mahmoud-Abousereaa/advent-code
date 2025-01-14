@@ -7,7 +7,6 @@ distance_diff = []
 with open('input.txt', 'r') as file:
   # Read each line in the file
   for line in file:
-    # Print each line
     list = line.split()
     left_hand_side_item = list[::len(list)]
     right_hand_side_item = list[len(list)-1]
