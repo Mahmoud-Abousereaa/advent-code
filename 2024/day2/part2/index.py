@@ -11,7 +11,7 @@ def is_safe_report(report):
 
 def apply_the_problem_dampener(report):
   flag = False
-  for idx, data in enumerate(report):
+  for idx in enumerate(report):
     removed_element = report.pop(idx)
     flag = is_safe_report(report)
     if (flag):
